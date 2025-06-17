@@ -20,151 +20,9 @@ import NextVisitDetails from "@/components/DashboardCards/NextVisitDetails.jsx";
 import { v4 as uuidv4 } from "uuid";
 
 function DashboardPage({ onLogout }) {
-  const [_appointments, setAppointments] = useState([
-    {
-      id: uuidv4(),
-      petName: "Milo",
-      ownerName: "Alice Smith",
-      service: "Vaccination",
-      date: "2025-06-18",
-      time: "12:30",
-      endTime: "13:30",
-      type: "CheckUp",
-      notes: "First vaccination",
-    },
-    {
-      id: uuidv4(),
-      petName: "Buddy",
-      ownerName: "John Doe",
-      service: "Dental Cleaning",
-      date: "2025-06-15",
-      time: "20:30",
-      endTime: "22:00",
-      type: "Report",
-      notes: "Long live king",
-    },
-    {
-      id: uuidv4(),
-      petName: "Cody",
-      ownerName: "Denis Kral",
-      service: "Surgery",
-      date: "2025-06-16",
-      time: "07:30",
-      endTime: "10:20",
-      type: "Emergency Visit",
-      notes:
-        "Sikidim yavrum tirim tirak tirim tirakkk olurmi hic calismamk",
-    },
-    {
-      id: uuidv4(),
-      petName: "Estus",
-      ownerName: "Emir Yumrukkaya",
-      service: "Review",
-      date: "2025-06-17",
-      time: "19:05",
-      endTime: "21:00",
-      type: "Video Consultation",
-      notes: "It's me",
-    },
-    {
-      id: uuidv4(),
-      petName: "Dante",
-      ownerName: "Mustafa Kemal",
-      service: "Vaccination",
-      date: "2025-06-18",
-      time: "06:30",
-      endTime: "08:00",
-      type: "on-Side Consultation",
-      notes: "There were many enemies",
-    },
-    {
-      id: uuidv4(),
-      petName: "Lufi",
-      ownerName: "Jack Shephard",
-      service: "Control Of Result",
-      date: "2025-06-19",
-      time: "08:00",
-      endTime: "10:40",
-      type: "Report",
-      notes: "Blalbla blablablabla I am doctor too",
-    },
-    {
-      id: uuidv4(),
-      petName: "Kufi",
-      ownerName: "Muhammed bin Tayyar",
-      service: "Dental Cleaning",
-      date: "2025-06-20",
-      time: "12:00",
-      endTime: "13:00",
-      type: "CheckUp",
-      notes: "darariiiiiii darari dararii",
-    },
-    {
-      id: uuidv4(),
-      petName: "Fluffy",
-      ownerName: "Samy Tomy Glock",
-      service: "Surgery",
-      date: "2025-06-18",
-      time: "14:30",
-      endTime: "16:00",
-      type: "Emergency Visit",
-      notes: "tun tun ne",
-    },
-    {
-      id: uuidv4(),
-      petName: "Dumy",
-      ownerName: "Big John Doe ",
-      service: "Vaccination",
-      date: "2025-06-18",
-      time: "21:00",
-      endTime: "22.30",
-      type: "on-Side Consultation",
-      notes: "not urgent",
-    },
-    {
-      id: uuidv4(),
-      petName: "Donk",
-      ownerName: "Sunny Punchrock",
-      service: "Review",
-      date: "2025-06-15",
-      time: "17:30",
-      endTime: "20:40",
-      type: "Video Consultation",
-      notes: "dsdsdfsfs",
-    },
-    {
-      id: uuidv4(),
-      petName: "Lokom",
-      ownerName: "Andy Cot",
-      service: "Dental Cleaning",
-      date: "2025-06-18",
-      time: "08:30",
-      endTime: "11:00",
-      type: "CheckUp",
-      notes: "who are you?",
-    },
-  ]);
-
-  const [patients, setPatients] = useState([
-    {
-      id: uuidv4(),
-      ownerName: "Ali Veli",
-      petName: "Boncuk",
-      species: "Dog",
-      hasActiveTreatment: "Active",
-      activeTreatment: "Surgery",
-      lastVisit: "2024-06-10",
-    },
-    {
-      id: uuidv4(),
-      ownerName: "Ayşe Fatma",
-      petName: "Pamuk",
-      species: "Cat",
-      hasActiveTreatment: "",
-      activeTreatment: "",
-      lastVisit: "2024-06-05",
-    },
-  ]);
+  // ✅ Now starts EMPTY
+  const [_appointments, setAppointments] = useState([]);
+  const [patients, setPatients] = useState([]);
 
   const handleDeleteAppointment = (eventToDelete) => {
     const newArray = _appointments.filter((appo) => appo.id !== eventToDelete);
@@ -190,7 +48,7 @@ function DashboardPage({ onLogout }) {
         <SideBar
           onClicked={(name) => setSelectedButton(name)}
           selected={selectedButton}
-          onLogout={onLogout} 
+          onLogout={onLogout}
         />
       </GridItem>
 
@@ -202,7 +60,13 @@ function DashboardPage({ onLogout }) {
           p="4"
         >
           <HStack justifyContent="space-between">
-            <Heading size="6xl" p={4} mx={30} color="pink.800" _dark={{ color: "white" }}>
+            <Heading
+              size="6xl"
+              p={4}
+              mx={30}
+              color="pink.800"
+              _dark={{ color: "white" }}
+            >
               Hi, Emir
             </Heading>
             <ToggleButton />
@@ -226,11 +90,17 @@ function DashboardPage({ onLogout }) {
         )}
 
         {selectedButton === "Patients" && (
-          <Patients patients={patients} setPatients={(p) => setPatients(p)} />
+          <Patients
+            patients={patients}
+            setPatients={(p) => setPatients(p)}
+          />
         )}
 
         {selectedButton === "Dashboard" && (
-          <SimpleGrid columns={{ base: 2, md: 5 }} gap={{ base: "24px", md: "40px" }}>
+          <SimpleGrid
+            columns={{ base: 2, md: 5 }}
+            gap={{ base: "24px", md: "40px" }}
+          >
             <GridItem colSpan={{ base: 1, md: 3 }}>
               <PatientsListDashboard appointments={_appointments} />
             </GridItem>
