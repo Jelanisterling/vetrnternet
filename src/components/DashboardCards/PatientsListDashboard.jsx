@@ -8,15 +8,15 @@ import {
 } from "@chakra-ui/react";
 
 function PatientsListDashboard({ appointments }) {
-  // Get today’s date in YYYY-MM-DD
+  
   const todayDate = new Date().toISOString().split("T")[0];
 
-  // Option A: show ALL today’s appointments
+  
   const todaysAppos = appointments.filter(
     (appo) => appo.date === todayDate
   );
 
-  // Sort by time properly
+ 
   const todaysSortedAppos = todaysAppos.sort((a, b) => {
     return a.time.localeCompare(b.time);
   });

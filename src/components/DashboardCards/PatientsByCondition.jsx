@@ -1,7 +1,7 @@
 import { Card, Heading, Stack, Text, Box } from "@chakra-ui/react";
 
 function PatientsByCondition({ patients }) {
-  // Count patients grouped by their treatment status
+ 
   const statusCounts = patients.reduce((acc, patient) => {
     const status = patient.hasActiveTreatment || "None";
     acc[status] = (acc[status] || 0) + 1;

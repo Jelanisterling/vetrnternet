@@ -4,12 +4,12 @@ function NextVisitDetails({ nextCardAppos }) {
   const now = new Date();
   const todayDate = now.toISOString().split("T")[0];
 
-  // Filter only today's appointments
+  
   const todaysAppos = nextCardAppos.filter(
     (appo) => appo.date === todayDate
   );
 
-  // Keep only future ones by comparing actual Date objects
+  
   const upcomingAppos = todaysAppos.filter((appo) => {
     const [h, m] = appo.time.split(":").map(Number);
     const appoDate = new Date();
@@ -17,7 +17,7 @@ function NextVisitDetails({ nextCardAppos }) {
     return appoDate >= now;
   });
 
-  // Sort by time properly
+ 
   const sortedUpcomingAppos = upcomingAppos.sort((a, b) =>
     a.time.localeCompare(b.time)
   );
