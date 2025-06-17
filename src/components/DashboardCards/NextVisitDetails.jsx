@@ -1,21 +1,26 @@
 import { Card, Heading, Stack, Text, Box } from "@chakra-ui/react";
 
 function NextVisitDetails({ nextCardAppos }) {
-  const [nowH, nowM] = new Date().toTimeString().split(":");
-  const todaysAppos = nextCardAppos.filter((appo) => (
-    appo.date === new Date().toISOString().split("T")[0] &&
-    (Number(appo.time.split(":")[0]) === Number(nowH)
-      ? Number(appo.time.split(":")[1]) >= Number(nowM)
-      : Number(appo.time.split(":")[0]) >= Number(nowH))
-  ));
+  const now = new Date();
+  const todayDate = now.toISOString().split("T")[0];
 
-  const todaysSortedAppos = todaysAppos.sort((a, b) => {
-    if (Number(a.time.split(":")[0]) !== Number(b.time.split(":")[0])) {
-      return Number(a.time.split(":")[0]) - Number(b.time.split(":")[0]);
-    } else {
-      return Number(a.time.split(":")[1]) - Number(b.time.split(":")[1]);
-    }
+  // Filter only today's appointments
+  const todaysAppos = nextCardAppos.filter(
+    (appo) => appo.date === todayDate
+  );
+
+  // Keep only future ones by comparing actual Date objects
+  const upcomingAppos = todaysAppos.filter((appo) => {
+    const [h, m] = appo.time.split(":").map(Number);
+    const appoDate = new Date();
+    appoDate.setHours(h, m, 0, 0);
+    return appoDate >= now;
   });
+
+  // Sort by time properly
+  const sortedUpcomingAppos = upcomingAppos.sort((a, b) =>
+    a.time.localeCompare(b.time)
+  );
 
   return (
     <Stack direction="row" alignItems="center" spacing={2} width="100%">
@@ -24,17 +29,17 @@ function NextVisitDetails({ nextCardAppos }) {
           <Heading size="lg">Upcoming Patient Details</Heading>
         </Box>
         <Box color="gray.500">
-          {todaysSortedAppos.length > 0 ? (
+          {sortedUpcomingAppos.length > 0 ? (
             <>
-              <Text mb={2}>Owner Name: {todaysSortedAppos[0].ownerName}</Text>
-              <Text mb={2}>Pet Name: {todaysSortedAppos[0].petName}</Text>
-              <Text mb={2}>Service: {todaysSortedAppos[0].service}</Text>
-              <Text mb={2}>Time: {todaysSortedAppos[0].time}</Text>
-              <Text mb={2}>Appointment Type: {todaysSortedAppos[0].type}</Text>
-              <Text mb={2}>Note: {todaysSortedAppos[0].notes}</Text>
+              <Text mb={2}>Owner Name: {sortedUpcomingAppos[0].ownerName}</Text>
+              <Text mb={2}>Pet Name: {sortedUpcomingAppos[0].petName}</Text>
+              <Text mb={2}>Service: {sortedUpcomingAppos[0].service}</Text>
+              <Text mb={2}>Time: {sortedUpcomingAppos[0].time}</Text>
+              <Text mb={2}>Appointment Type: {sortedUpcomingAppos[0].type}</Text>
+              <Text mb={2}>Note: {sortedUpcomingAppos[0].notes}</Text>
             </>
           ) : (
-            <Text>No appointments for today.</Text>
+            <Text>No upcoming appointments today.</Text>
           )}
         </Box>
       </Card>

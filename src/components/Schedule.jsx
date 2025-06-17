@@ -21,7 +21,7 @@ function Schedule({ appointments, handleDeleteAppointment }) {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const cancelRef = useRef();
 
-  // Store the event ID to delete when confirmed
+  
   const [eventIdToDelete, setEventIdToDelete] = useState(null);
 
   const openDeleteConfirm = (eventId) => {
