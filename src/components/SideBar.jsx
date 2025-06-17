@@ -1,10 +1,18 @@
-import { VStack, Button, HStack, Heading, Flex, Icon, useColorModeValue } from "@chakra-ui/react";
+import {
+  VStack,
+  Button,
+  HStack,
+  Heading,
+  Flex,
+  Icon,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { CiHome, CiLogout } from "react-icons/ci";
 import { IoPeopleOutline } from "react-icons/io5";
 import { HiOutlineDocumentText } from "react-icons/hi2";
 import { GrSchedules } from "react-icons/gr";
 
-function SideBar({ onClicked, selected }) {
+function SideBar({ onClicked, selected, onLogout }) {
   const buttonNames = [
     { name: "Dashboard", icon: CiHome },
     { name: "Patients", icon: IoPeopleOutline },
@@ -12,7 +20,6 @@ function SideBar({ onClicked, selected }) {
     { name: "Schedule", icon: GrSchedules },
   ];
 
-  
   const bg = useColorModeValue("gray.50", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.600");
 
@@ -60,7 +67,7 @@ function SideBar({ onClicked, selected }) {
           mb={4}
           spacing={2}
           cursor="pointer"
-          onClick={() => alert("Logging out...")}
+          onClick={onLogout} // ✅ Call the prop instead of alert!
           _hover={{ color: "orange.600" }}
         >
           <Icon as={CiLogout} w={6} h={6} />

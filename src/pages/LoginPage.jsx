@@ -1,4 +1,3 @@
-// src/pages/LoginPage.jsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -11,6 +10,7 @@ import {
   FormErrorMessage,
   VStack,
   useToast,
+  Flex,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,7 +30,7 @@ export default function LoginPage({ onLogin }) {
     e.preventDefault();
 
     if (email === validUser.email && password === validUser.password) {
-      onLogin(); 
+      onLogin();
       toast({
         title: 'Login successful',
         description: `Welcome, ${email}`,
@@ -40,51 +40,68 @@ export default function LoginPage({ onLogin }) {
       });
 
       setError('');
-      navigate('/dashboard'); 
+      navigate('/dashboard');
     } else {
       setError('Invalid email or password');
     }
   };
 
   return (
-    <Box maxW="sm" mx="auto" mt={20} p={8} borderWidth={1} borderRadius="lg" boxShadow="lg">
-      <Heading mb={6} textAlign="center" size="lg">
-        Vet Clinic Login
-      </Heading>
-      <form onSubmit={handleSubmit}>
-        <VStack spacing={4}>
-          <FormControl isInvalid={!!error}>
-            <FormLabel>Email address</FormLabel>
-            <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@vetclinic.com"
-              required
-            />
-          </FormControl>
+    <Flex
+      height="100vh"
+      width="100%"
+      backgroundImage="url('/images/login-bg.jpg')" 
+      backgroundSize="cover"
+      backgroundPosition="center"
+      justify="center"
+      align="center"
+    >
+      <Box
+        maxW="sm"
+        p={8}
+        borderWidth={1}
+        borderRadius="lg"
+        boxShadow="lg"
+        bg="whiteAlpha.900" 
+      >
+        <Heading mb={6} textAlign="center" size="lg">
+          Vet Clinic Login
+        </Heading>
+        <form onSubmit={handleSubmit}>
+          <VStack spacing={4}>
+            <FormControl isInvalid={!!error}>
+              <FormLabel>Email address</FormLabel>
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="admin@vetclinic.com"
+                required
+              />
+            </FormControl>
 
-          <FormControl isInvalid={!!error}>
-            <FormLabel>Password</FormLabel>
-            <Input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="secure123"
-              required
-            />
-            {error && <FormErrorMessage>{error}</FormErrorMessage>}
-          </FormControl>
+            <FormControl isInvalid={!!error}>
+              <FormLabel>Password</FormLabel>
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="secure123"
+                required
+              />
+              {error && <FormErrorMessage>{error}</FormErrorMessage>}
+            </FormControl>
 
-          <Button colorScheme="teal" width="full" type="submit">
-            Login
-          </Button>
-        </VStack>
-      </form>
+            <Button colorScheme="teal" width="full" type="submit">
+              Login
+            </Button>
+          </VStack>
+        </form>
 
-      <Text mt={4} fontSize="sm" color="gray.500" textAlign="center">
-        Hint: admin@vetclinic.com / secure123
-      </Text>
-    </Box>
+        <Text mt={4} fontSize="sm" color="gray.500" textAlign="center">
+          Hint: admin@vetclinic.com / secure123
+        </Text>
+      </Box>
+    </Flex>
   );
 }
