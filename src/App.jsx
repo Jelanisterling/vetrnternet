@@ -1,4 +1,4 @@
-// src/App.jsx
+
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import LoginPage from '@/pages/LoginPage';
@@ -8,14 +8,25 @@ import ProtectedRoute from '@/routes/ProtectedRoute';
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
+
   return (
     <Routes>
-      <Route path="/" element={<LoginPage onLogin={() => setIsAuthenticated(true)} />} />
+      <Route
+        path="/"
+        element={<LoginPage onLogin={handleLogin} />}
+      />
       <Route
         path="/dashboard"
         element={
           <ProtectedRoute isAuthenticated={isAuthenticated}>
-            <DashboardPage />
+            <DashboardPage onLogout={handleLogout} />
           </ProtectedRoute>
         }
       />

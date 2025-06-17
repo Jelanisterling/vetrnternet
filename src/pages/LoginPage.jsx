@@ -30,7 +30,7 @@ export default function LoginPage({ onLogin }) {
     e.preventDefault();
 
     if (email === validUser.email && password === validUser.password) {
-      onLogin(); // ✅ Update auth state
+      onLogin(); 
       toast({
         title: 'Login successful',
         description: `Welcome, ${email}`,
@@ -40,7 +40,7 @@ export default function LoginPage({ onLogin }) {
       });
 
       setError('');
-      navigate('/dashboard'); // ✅ Redirect
+      navigate('/dashboard'); 
     } else {
       setError('Invalid email or password');
     }
